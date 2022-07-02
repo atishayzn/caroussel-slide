@@ -1,0 +1,45 @@
+.slider {
+    width: 100%;  
+}
+
+.slider .photos img {
+    width: 100%; 
+    left: 0;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.slider .photos img.shown {
+    opacity: 1;
+}
+
+.prev:before,
+.next:before {
+  color: #fff;
+  font-size: 60px;
+  position: absolute;
+  top: 35%;
+  padding: 25px;
+  cursor: pointer;
+}
+
+.prev:before {
+  content: '<';
+  left: 0;
+  opacity: 0;
+}
+
+.next:before {
+  content: '>';
+  right: 0;
+  opacity: 0;
+}
+.prev.shown:before { 
+    opacity: 1;
+}
+.next.shown:before { 
+    opacity: 1;
+}
+  
+
