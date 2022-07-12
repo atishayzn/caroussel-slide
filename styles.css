@@ -4,6 +4,7 @@
 
 .slider .photos img {
     width: 100%; 
+    height: 75%;
     left: 0;
     position: absolute;
     opacity: 0;
@@ -19,7 +20,7 @@
   color: #fff;
   font-size: 60px;
   position: absolute;
-  top: 35%;
+  top: 30%;
   padding: 25px;
   cursor: pointer;
 }
@@ -40,6 +41,23 @@
 }
 .next.shown:before { 
     opacity: 1;
+}
+.pagination-dots{
+    top: 80%;
+    right:45%;
+    position: absolute;
+    display: flex;
+}
+.dot{
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  background: rgba(0,0,0,0.3);
+  cursor: pointer;
+} 
+.dot.shown{
+  background: rgba(0,0,0,0.75);
 }
   
 
