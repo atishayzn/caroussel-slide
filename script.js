@@ -1,76 +1,74 @@
 $('document').ready(function() {
     var i=0;
+    const mvp=1;
     var n=$('.photos img').length
     $('.prev').click(function(){ 
         $('.photos img').eq(i).removeClass('shown');
-        i--;
-        if(i==0){
+        $('.pagination-dots div').eq(i).removeClass('shown')
+        i-=mvp;
+        if(i<=0){
+            i=0
             $('.prev').removeClass('shown')
         }
         if(i<n-1){
             $('.next').addClass('shown')
-        }
+        } 
         $('.photos img').eq(i).addClass('shown');
+        $('.pagination-dots div').eq(i).addClass('shown')
     })
     $('.next').click(function(){ 
         $('.photos img').eq(i).removeClass('shown');
-        i++; 
-        if(i==n-1){
+        $('.pagination-dots div').eq(i).removeClass('shown')
+        i+=mvp; 
+        if(i>=n-1){
+            i=n-1
             $('.next').removeClass('shown')
         }
         if(i>0){
             $('.prev').addClass('shown')
-        }
+        } 
         $('.photos img').eq(i).addClass('shown');
+        $('.pagination-dots div').eq(i).addClass('shown')
+    })
+
+    renderDots(n)
+
+    $('.dot').click(function(e){
+      var parent=this.parentNode
+      var index = Array.prototype.indexOf.call(parent.children, e.target);
+
+      
+      console.log(parent.children)
+      $('.photos img').eq(i).removeClass('shown');
+      $('.pagination-dots div').eq(i).removeClass('shown')
+      i=index
+      if(i>=n-1){
+        i=n-1
+        $('.next').removeClass('shown')
+      }
+      if(i>0){
+          $('.prev').addClass('shown')
+      } 
+      if(i<=0){
+        i=0
+        $('.prev').removeClass('shown')
+      }
+      if(i<n-1){
+          $('.next').addClass('shown')
+      }
+      $('.photos img').eq(i).addClass('shown');
+      $('.pagination-dots div').eq(i).addClass('shown')
+      
     })
 
   
 });
 
-
-function Slider(obj) {
-
-  this.images = $(obj.images);
-  this.auto = obj.auto;
-  this.btnPrev = obj.btnPrev;
-  this.btnNext = obj.btnNext;
-  this.rate = obj.rate || 1000;
-
-  var i = 0;
-  var slider = this;
-
-    // The "Previous" button: to remove the class .shoved, show the previous image and add the .shoved class
-    
-    this.prev = function () {
-    slider.images.eq(i).removeClass('shown');
-    i--;
-    if(i==0){
-        this.prev.removeClass('shown');
-    }
-    
-
-    slider.images.eq(i).addClass('shown');
+function renderDots(slideCount){
+  for(var i=0;i<slideCount;i++){
+    $('.pagination-dots').append("<div class='dot'></div>")
   }
+  $('.pagination-dots div').eq(0).addClass('shown')
 
-    // The "Next" button: to remove the class .shoved, show the next image and add the .shoved class
-  this.next = function () {
-    slider.images.eq(i).removeClass('shown');
-    i++;
-    console.log(slider)
-    if (i === slider.images.length-1) {
-      slider.btnNext.removeClass('shown');
-        
-    }
+}
 
-    slider.images.eq(i).addClass('shown');
-  }
-
-    // To add next and prev functions when clicking the corresponding buttons
-    $(slider.btnPrev).on('click', function(){ slider.prev();});
-    $(slider.btnNext).on('click', function(){ slider.next();});
-
-    // For the automatic slider: this method calls the next function at the set rate
-  if (slider.auto)  {
-        setInterval(slider.next, slider.rate);
-    }
-};
