@@ -16,6 +16,7 @@ $('document').ready(function() {
         $('.photos img').eq(i).addClass('shown');
         $('.pagination-dots div').eq(i).addClass('shown')
     })
+    
     $('.next').click(function(){ 
         $('.photos img').eq(i).removeClass('shown');
         $('.pagination-dots div').eq(i).removeClass('shown')
